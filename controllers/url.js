@@ -17,18 +17,28 @@ return res.render('home',{id:shortId_generated});
 return res.status(201).json({shortId_generated});
 }
 
+
 async function getClickHistory(req,res){
-    const shortId=req.params.shortId;
+    console.log(req.body.shortId);
+    const shortId=req.body.shortId.substring(26);
+
     const data=await Url.findOne({shortId:shortId});
+    console.log(shortId);
     if(!data){
-        return res.status(404).json({error:'url not found'});
+        return res.render('analytics');
     }
     else{
-        return res.status(200).json({visited:data.clickHistory.length, clickHistory:data.clickHistory});
+        return res.render('analytics',{visited:data.clickHistory.length, data:data});
     }
+  }
+  async function getpage(req,res){
+   
+        return res.render('analytics');
+    
   }
 
 module.exports={
     generateShortUrl,
-    getClickHistory
+    getClickHistory,
+    getpage
 }
