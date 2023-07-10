@@ -19,8 +19,8 @@ return res.status(201).json({shortId_generated});
 
 
 async function getClickHistory(req,res){
-    console.log(req.body.shortId);
-    const shortId=req.body.shortId.substring(26);
+  
+    const shortId=req.body.shortId.substring(35);
 
     const data=await Url.findOne({shortId:shortId});
     console.log(shortId);
